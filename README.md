@@ -76,3 +76,9 @@ MIT — like the Open Waters AIS network. Attribution required.
 ## Related
 
 - OpenWaters AIS API: https://ais.openwaters.io/api/ais/
+
+## Apify Store
+
+This MCP server is published as an Apify Actor: [japan-port-vessel-mcp](https://apify.com/fruitful_quintessence/japan-port-vessel-mcp).
+
+**Apify Store**: [atushi1841](https://apify.com/fruitful_quintessence)

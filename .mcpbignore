@@ -1,0 +1,10 @@
+# MCPB バンドルから除外するファイル（pack_mcpb.py が参照）
+__pycache__/
+*.pyc
+.pytest_cache/
+*.mcpb
+.git/
+.gitignore
+README.md
+data/
+logs/

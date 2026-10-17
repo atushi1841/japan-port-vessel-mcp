@@ -1,0 +1,178 @@
+{
+  "manifest_version": "0.4",
+  "name": "japan-port-vessel-mcp",
+  "display_name": "Japan Port Vessel Traffic MCP (AIS Position & ETA)",
+  "version": "0.1.0",
+  "description": "Real-time AIS vessel tracking across 20 Japanese ports. Covers position, ETA, delay estimation, port call summaries.",
+  "long_description": "Japan Port Vessel Traffic MCP — OpenWaters AIS free API for Japanese port monitoring.\n\n## Tools\n\n| Tool | Description |\n|---|---|\n| `list_japan_ports()` | Return catalog of 20 major Japanese ports with bounding boxes |\n| `get_vessels_in_port(port_code, limit)` | Live vessel snapshot within a port |\n| `get_vessel(mmsi)` | Latest position, name, IMO, flag, ETA, destination for one vessel |\n| `get_vessel_track(mmsi, hours, interval, limit)` | Historical track as GeoJSON coordinates |\n| `estimate_vessel_eta(mmsi, port_code)` | Compare AIS-reported ETA with speed-projected ETA; delay estimate |\n| `get_port_overview(port_code, max_age_hours)` | Port activity summary: counts by type/flag/status, fastest vessels |\n\n## Source\n\n- Open Waters AIS (ais.openwaters.io): free, no API key, aggregate community receivers.\n- Attribution required; see source/station fields in responses.\n\n## Requirements\n\n- Python >= 3.10\n- fastmcp, mcp\n- No keys / credentials needed (anonymous tier works for all tools)\n- stdio transport; HTTP optional via FastMCP built-in.\n\n## Related\n\n- Kensho: https://github.com/atushi1841/kensho\n- AIS: https://openwaters.io/ais/",
+  "author": {
+    "name": "atushi1841",
+    "url": "https://github.com/atushi1841"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atushi1841/japan-port-vessel-mcp"
+  },
+  "homepage": "https://github.com/atushi1841/japan-port-vessel-mcp",
+  "server": {
+    "type": "python",
+    "entry_point": "src/stdio_main.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${__dirname}",
+        "src/stdio_main.py"
+      ]
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "linux",
+      "win32"
+    ],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  },
+  "keywords": [
+    "japan",
+    "ais",
+    "vessel",
+    "port",
+    "maritime",
+    "shipping",
+    "eta",
+    "delay",
+    "mcp"
+  ],
+  "tools": [
+    {
+      "name": "list_japan_ports",
+      "description": "Return a catalog of major Japanese ports with bounding boxes for AIS queries.",
+      "inputSchema": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_vessels_in_port",
+      "description": "Return vessels currently within the named Japanese port bounding box.",
+      "inputSchema": {
+        "properties": {
+          "port_code": {
+            "default": "JPYOK",
+            "type": "string",
+            "description": "ISO-like port code. Call list_japan_ports for valid codes."
+          },
+          "limit": {
+            "default": 30,
+            "type": "integer",
+            "description": "max vessels returned (anonymous tier cap 500)."
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_vessel",
+      "description": "Fetch the latest known position and static information for a vessel by MMSI.",
+      "inputSchema": {
+        "properties": {
+          "mmsi": {
+            "type": "string",
+            "description": "nine-digit Maritime Mobile Service Identity. Leading zeros preserved."
+          }
+        },
+        "required": [
+          "mmsi"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_vessel_track",
+      "description": "Return the past trajectory of a vessel as GeoJSON-style positions.",
+      "inputSchema": {
+        "properties": {
+          "mmsi": {
+            "type": "string",
+            "description": "vessel MMSI."
+          },
+          "hours": {
+            "default": 24,
+            "type": "integer",
+            "description": "how far back (defaults to 24h, up to 366d)."
+          },
+          "interval": {
+            "default": "5m",
+            "type": "string",
+            "description": "granularity — e.g. '5m', '15m', '1h'."
+          },
+          "limit": {
+            "default": 500,
+            "type": "integer",
+            "description": "max points (anon cap 1000)."
+          }
+        },
+        "required": [
+          "mmsi"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "estimate_vessel_eta",
+      "description": "Estimate a vessel's arrival at its reported destination port.\n\nCompares the AIS-reported ETA (`eta` field) against a speed-based projection\nto infer delay. Also shows distance and travel-time estimates.",
+      "inputSchema": {
+        "properties": {
+          "mmsi": {
+            "type": "string",
+            "description": "vessel MMSI."
+          },
+          "port_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "optional explicit port code to validate destination against."
+          }
+        },
+        "required": [
+          "mmsi"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_port_overview",
+      "description": "Aggregated overview of a Japanese port's vessel traffic.\n\nReturns counts by vessel type, flag, and navigation status.",
+      "inputSchema": {
+        "properties": {
+          "port_code": {
+            "default": "JPYOK",
+            "type": "string"
+          },
+          "max_age_hours": {
+            "default": 6,
+            "type": "integer"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      }
+    }
+  ]
+}

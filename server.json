@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.atushi1841/japan-port-vessel-mcp",
+  "description": "Japanese port vessel traffic, AIS positions, ETA & delay estimation via OpenWaters AIS (free, no key).",
+  "repository": {
+    "url": "https://github.com/atushi1841/japan-port-vessel-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "title": "Japan Port Vessel Traffic MCP (AIS Position & ETA)",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/atushi1841/japan-port-vessel-mcp/releases/download/v0.1.0/server.mcpb",
+      "version": "0.1.0",
+      "fileSha256": "4821d3a58418f8d3fe0294ca90c2b31c84c2b9e2625e14414052509c3554dfc8",
+      "transport": {"type": "stdio"}
+    }
+  ]
+}

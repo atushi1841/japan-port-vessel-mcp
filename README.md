@@ -75,5 +75,4 @@ MIT — like the Open Waters AIS network. Attribution required.
 
 ## Related
 
-- Kensho project: https://github.com/atushi1841/kensho
 - OpenWaters AIS API: https://ais.openwaters.io/api/ais/

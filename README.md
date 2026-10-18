@@ -82,3 +82,9 @@ MIT — like the Open Waters AIS network. Attribution required.
 This MCP server is published as an Apify Actor: [japan-port-vessel-mcp](https://apify.com/fruitful_quintessence/japan-port-vessel-mcp).
 
 **Apify Store**: [atushi1841](https://apify.com/fruitful_quintessence)
+
+---
+## Data & Store
+
+- **Apify Store:** https://apify.com/fruitful_quintessence
+- **Gumroad datasets:** https://atushi5.gumroad.com/l/kutuxe

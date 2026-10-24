@@ -6,13 +6,13 @@
     "url": "https://github.com/atushi1841/japan-port-vessel-mcp",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "Japan Port Vessel Traffic MCP (AIS Position & ETA)",
   "packages": [
     {
       "registryType": "mcpb",
       "identifier": "https://github.com/atushi1841/japan-port-vessel-mcp/releases/download/v0.1.0/server.mcpb",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "fileSha256": "99c37dbb9e1a333c0fc8585b531db707eb7aabfc75a20baa22a82817e04213ec",
       "transport": {
         "type": "stdio"
